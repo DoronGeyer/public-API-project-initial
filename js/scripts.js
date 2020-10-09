@@ -7,7 +7,7 @@ async function fetchUrlData(url) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data.results[0]);//TODO: remove after completion
+    console.log(data.results[0]); //TODO: remove after completion just for reference
     return data.results;
   } catch (error) {
     return console.log("there was an error ", error);
@@ -38,8 +38,20 @@ function createElement(elementType, classListArray, uniqueId = "none") {
   newElement.classList.add(...classListArray);
   return newElement;
 }
+//Search input construction
+!(function () {
+  document.getElementsByClassName("search-container")[0]
+          .insertAdjacentHTML(
+            "beforeend",
+            `<form action="#" method="get">
+                            <input type="search" id="search-input" class="search-input" placeholder="Search...">
+                            <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+                        </form>`
+        );
+})();
+                       
+//Card constructor function
 
-//card construct
 function createCardElements(imgRef, first, last, email, city, state) {
   const cardDiv = createElement("DIV", ["card"]);
   const cardImgContainerDiv = createElement("DIV", ["card-img-container"]);
