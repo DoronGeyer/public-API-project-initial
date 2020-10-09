@@ -7,7 +7,7 @@ const pageBody = document.getElementsByTagName("body")[0];
 async function fetchUrlData(url) {
   try {
     const response = await fetch(url);
-    const data = await response.json(); //TODO: remove after completion just for reference
+    const data = await response.json();
     return data.results;
   } catch (error) {
     return console.log("there was an error ", error);
@@ -132,9 +132,9 @@ function createCardElements(imgRef, first, last, email, city, state) {
     modalContainer.appendChild(modalButtonContainer);
     console.log("modalConstructor working")
 
+    pageBody.appendChild(modalContainer);
 };
 
-// test person is from the array of data pulled. it is index 0 of the 12 indeces logging to the console
 /*
 <div class="modal-container">
     <div class="modal">
