@@ -2,14 +2,14 @@
 //global variables.
 const galleryDiv = document.getElementById("gallery");
 const pageBody = document.getElementsByTagName("body")[0];
-let testPerson;
+let testPerson = '';
 /* API request functionality */
 async function fetchUrlData(url) {
   try {
     const response = await fetch(url);
-    const data = await response.json();
-    console.log(data.results[0]); //TODO: remove after completion just for reference
-    testPerson = data.results[0];
+    const data = await response.json(); //TODO: remove after completion just for reference
+    testPerson = data.results[0]
+    console.log( testPerson)
     return data.results;
   } catch (error) {
     return console.log("there was an error ", error);
@@ -25,9 +25,9 @@ fetchUrlData("https://randomuser.me/api/?nat=US&results=12")
                                         index.email,
                                         index.location.city,
                                         index.location.state
-                        );
-                    });
-                });
+                        )
+                    })
+                })
 
 /* DOM Element construction code */
 
@@ -80,10 +80,11 @@ function createCardElements(imgRef, first, last, email, city, state) {
 //TODO:      a click event handler on the image should trigger a search through array for a matched value and then provide that index to the 
 //TODO:       modalcostructor function.
 //Modal constructor function
-function modalConstructor(person){
+ function modalConstructor(person){
     const modalContainer = createElement('DIV',['modal-container']);
     const modalDiv = createElement('DIV',['modal']);
-    const closeButton = createElement('BUTTON',['modal-close-button'],'modal-close-button').innerHTML = `<strong>X</strong>`;
+    const closeButton = createElement('BUTTON',['modal-close-button'],'modal-close-button');
+          closeButton.innerHTML = `<strong>X</strong>`;
     const modalInfoContainer = createElement("DIV",['modal-info-container']);
     
     const modalImage = createElement('IMG',['modal-img']); 
@@ -99,7 +100,7 @@ function modalConstructor(person){
     const pCity = createElement('P',['modal-text']);
           pCity.textContent= `${person.location.city}`;
     
-          const hrBreak = createElement('HR'['hr-line-break']);
+          const hrBreak = createElement('HR',['hr-line-break']);
     const pPhoneNumber = createElement('P',['modal-text']);
           pPhoneNumber.textContent= `${person.phone.replace('-', ' ')}`;
     
@@ -129,12 +130,12 @@ function modalConstructor(person){
     modalInfoContainer.appendChild(pBirthday);
 
     modalContainer.appendChild(modalButtonContainer);
+    console.log(person)
 
-    //TODO:FIXME:TODO:FIXME:   Append together and build out below structure. Test it.
 };
-modalConstructor(testPerson);// test person is from the array of data pulled. it is index 0 of the 12 indeces logging to the console works.
+modalConstructor(testPerson);
+// test person is from the array of data pulled. it is index 0 of the 12 indeces logging to the console
 /*
-
 <div class="modal-container">
     <div class="modal">
         <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
