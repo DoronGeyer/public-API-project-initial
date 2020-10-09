@@ -2,14 +2,12 @@
 //global variables.
 const galleryDiv = document.getElementById("gallery");
 const pageBody = document.getElementsByTagName("body")[0];
-let testPerson = '';
+
 /* API request functionality */
 async function fetchUrlData(url) {
   try {
     const response = await fetch(url);
     const data = await response.json(); //TODO: remove after completion just for reference
-    testPerson = data.results[0]
-    console.log( testPerson)
     return data.results;
   } catch (error) {
     return console.log("there was an error ", error);
@@ -17,6 +15,7 @@ async function fetchUrlData(url) {
 }
 fetchUrlData("https://randomuser.me/api/?nat=US&results=12")
             .then((data) => {
+                let newData= data;
                 data.forEach((index) => {
                         createCardElements(
                                         index.picture.medium,
@@ -27,8 +26,9 @@ fetchUrlData("https://randomuser.me/api/?nat=US&results=12")
                                         index.location.state
                         )
                     })
+                    return newData;
                 })
-
+                .then(data=> modalConstructor(data[0]));
 /* DOM Element construction code */
 
 // ELement constructor function
@@ -130,10 +130,10 @@ function createCardElements(imgRef, first, last, email, city, state) {
     modalInfoContainer.appendChild(pBirthday);
 
     modalContainer.appendChild(modalButtonContainer);
-    console.log(person)
+    console.log("modalConstructor working")
 
 };
-modalConstructor(testPerson);
+
 // test person is from the array of data pulled. it is index 0 of the 12 indeces logging to the console
 /*
 <div class="modal-container">
