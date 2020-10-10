@@ -57,7 +57,7 @@ function modalConstructor(person) {
   let contentHTML = `<div class="modal-container">
   <div class="modal">
       <button type="button" id="modal-close-btn" class="modal-close-btn"><strong class="strong-tag">X</strong></button>
-      <div class="modal-info-container">
+      <div class="modal-info-container .shadow">
           <img class="modal-img" src=${
             person.picture.large
           } alt="profile picture">
@@ -88,7 +88,6 @@ function modalConstructor(person) {
 /******************EVENT HANDLER FUNCTIONS**************/
 //function to search through cards an hide non matching cards from display.
 function searchUsers(e) {
-  h1.textContent = "AWESOME STARTUP EMPLOYEE DIRECTORY"
   let cardCollection = document.getElementsByClassName("card");
   let iterable = [...cardCollection];
   if (e.target.tagName === "INPUT" || e.target.id === "search-submit") {
@@ -107,7 +106,6 @@ function searchUsers(e) {
         .includes(searchInput)
     );
   } else {
-    h1.textContent = "NO USER FOUND";
     filteredList = userListLoaded;
   }
 }
