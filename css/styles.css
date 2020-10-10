@@ -33,6 +33,7 @@ header h1 {
     color: rgba(50, 50, 50, 0.9);
     margin-top: 35px;
     margin-left: 35px;
+    border-bottom:4px solid #486E48;
 }
 
 .search-input {
@@ -45,7 +46,7 @@ header h1 {
 }
 
 .search-input:active, .search-input:hover, .search-input:focus {
-    border: 1px solid rgba(50, 50, 50, 0.9);
+    border: 3px solid rgba(50, 50, 50, 0.9);
 }
 
 .search-submit {
@@ -53,7 +54,7 @@ header h1 {
     height: 33px;
     background: rgba(245, 245, 245, 0.9);
     border-radius: 0 0.25rem 0.25rem 0;
-    border: 1px solid rgba(200, 200, 200, 0.9);
+    border: 2px solid rgba(200, 200, 200, 0.9);
     transition: .4s ease-out;
     outline: none;
 }
@@ -165,6 +166,8 @@ header h1 {
     width: 150px;
     margin-top: 35px;
     border-radius: 50%;
+    border:3px dotted #486E48;
+    box-shadow: 0 0 8px 5px #9AB3A8
 }
 
 .modal-name {
