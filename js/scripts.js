@@ -6,6 +6,7 @@ const searchContainer = document.querySelector("body > header > div > div.search
 //User interactivity values and references
 let modalDiv = '';
 let userListLoaded ='';
+let filteredList = userListLoaded;
 let currentModalUserIndex = '';
 /****************** API request functionality ******************/
 async function fetchUrlData(url) {
@@ -108,7 +109,8 @@ function checkModalMatch(event){
 }
 // Function for handling user click events on modal buttons. 
 function modalButtonHandler(e){
-    if(e.target.className ==="modal-close-btn"||e.target.className==="strong-tag")  {pageBody.removeChild(modalDiv)}
+    if(e.target.className ==="modal-close-btn"||e.target.className==="strong-tag") 
+         { pageBody.removeChild(modalDiv) }
     if(e.target.id ==="modal-prev")  {
       if(currentModalUserIndex== 0){
         e.target.style.backgroundColor ="tomato";
