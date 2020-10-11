@@ -212,7 +212,9 @@ header h1 {
     transition: .4s ease-out;
     outline: none;
   }
-  
+  .modal-btn-container .btn:disabled {
+    background-color:tomato;
+}
 
 /* ===================================== 
    Media Queries

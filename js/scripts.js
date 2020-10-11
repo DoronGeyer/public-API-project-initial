@@ -20,27 +20,13 @@ async function fetchUrlData(url) {
     return console.log("there was an error ", error);
   }
 }
-fetchUrlData("https://randomuser.me/api/?nat=US&results=12").then((data) => {
-  data.forEach((index) => createCardElements(index));
-  userListLoaded = data;
-  filteredList = userListLoaded;
-});
-/******************Search input construction using IIFE**************/
-!(function () {
-  searchContainer.insertAdjacentHTML(
-    "beforeend",`
-                        <form id= "form"action="#" method="get">
-                            <input type="search" id="search-input" class="search-input" placeholder="Search...">
-                            <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-                        </form>`
-  );
-})();
+
 /******************Card constructor function**************/
 function createCardElements(index) {
   let cardHTMLelement = `
           <div class="card">
           <div class="card-img-container">
-              <img class="card-img" src= ${index.picture.large} alt= "profile photo">
+              <img class="card-img" src= ${index.picture.large} alt= "${index.name.first} ${index.name.last}">
           </div>
           <div class="card-info-container">
               <h3 id="name" class="card-name cap">${index.name.first} ${index.name.last}</h3>
@@ -70,8 +56,8 @@ function modalConstructor(person) {
       </div>
   </div>
   <div class="modal-btn-container">
-      <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-      <button type="button" id="modal-next" class="modal-next btn">Next</button>
+      <button type="button" id="modal-prev" ${currentModalUserIndex == 0 ? "disabled" :''} class="modal-prev btn">Prev</button>
+      <button type="button" id="modal-next" ${currentModalUserIndex == filteredList.length-1 ?"disabled":''} class="modal-next btn">Next</button>
   </div>
 </div>`;
   pageBody.insertAdjacentHTML("beforeend", contentHTML);
@@ -100,15 +86,12 @@ function searchUsers(e) {
         .toLowerCase()
         .includes(searchInput)
     );
+    filteredList.length>0?h1.textContent ="EMPLOYEE DIRECTORY" : h1.textContent="NO RESULTS FOUND" ;
   } else {
     filteredList = userListLoaded;
   }
 }
-//function to provide feedback if no employees are found
-function checkSearch(){
-  let cards = document.getElementsByClassName("show-card");
-  cards.length>0?h1.textContent ="EMPLOYEE DIRECTORY" : h1.textContent="NO RESULTS FOUND" ; 
-}
+
 //Funciton to compare the email value as a unique identifier on click with the userListLoaded data and pass it to constructor
 function checkModalMatch(event) {
   if (event.target.closest("div.card")) {
@@ -128,29 +111,26 @@ function modalButtonHandler(e) {
     pageBody.removeChild(modalDiv);
   }
   if (e.target.id === "modal-prev") {
-    if (currentModalUserIndex == 0) {
-      e.target.style.backgroundColor = "tomato";
-      e.target.disabled = true;
-    } else {
       pageBody.removeChild(modalDiv);
       let newModalIndex = currentModalUserIndex - 1;
-      modalConstructor(filteredList[newModalIndex]);
       currentModalUserIndex = newModalIndex;
-    }
-  }
-  if (e.target.id === "modal-next") {
-    if (currentModalUserIndex < filteredList.length - 1) {
-      pageBody.removeChild(modalDiv);
-      let newModalIndex = currentModalUserIndex + 1;
       modalConstructor(filteredList[newModalIndex]);
-      currentModalUserIndex = newModalIndex;
-    } else {
-      e.target.style.backgroundColor = "tomato";
-      e.target.disabled = true;
     }
-  }
+    if (e.target.id === "modal-next") {
+        pageBody.removeChild(modalDiv);
+        let newModalIndex = currentModalUserIndex + 1;
+        currentModalUserIndex = newModalIndex;
+        modalConstructor(filteredList[newModalIndex]);             
+  } 
 }
+
+//Program initialisation.
+fetchUrlData("https://randomuser.me/api/?nat=US&results=12").then((data) => {
+  data.forEach((index) => createCardElements(index));
+  userListLoaded = data;
+  filteredList = userListLoaded;
+});
 /******************EVENT LISTENERS**************/
 galleryDiv.addEventListener("click", (e) => checkModalMatch(e));
-searchContainer.addEventListener("keyup", (e) =>{searchUsers(e);checkSearch()});
+searchContainer.addEventListener("keyup", (e) => searchUsers(e));
 searchContainer.addEventListener("click", (e) => searchUsers(e));
