@@ -14,5 +14,6 @@ async fetch requests
 vanilla js without frameworks or plugins
 arrow functions .map(), .filter(), 
 template literals + interpolation. 
-+Callback functions 
-+Fetch API
+Callback functions 
+Fetch API
+IIFE, ternaries;

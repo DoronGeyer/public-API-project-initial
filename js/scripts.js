@@ -3,7 +3,7 @@
 const galleryDiv = document.getElementById("gallery");
 const pageBody = document.getElementsByTagName("body")[0];
 const searchContainer = document.querySelector("body > header > div > div.search-container");
-const h1 = document.querySelector("body > header > div > div.header-text-container > h1");
+const h1 = document.querySelector(".h1-text");
 //User interactivity values and references
 let modalDiv = null;
 let userListLoaded = [];
@@ -28,8 +28,8 @@ fetchUrlData("https://randomuser.me/api/?nat=US&results=12").then((data) => {
 /******************Search input construction using IIFE**************/
 !(function () {
   searchContainer.insertAdjacentHTML(
-    "beforeend",
-    `<form action="#" method="get">
+    "beforeend",`
+                        <form id= "form"action="#" method="get">
                             <input type="search" id="search-input" class="search-input" placeholder="Search...">
                             <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
                         </form>`
@@ -95,8 +95,12 @@ function searchUsers(e) {
     for (const card of iterable) {
       let cardName = card.querySelector("h3").textContent.toLowerCase();
       if (cardName.includes(searchInput)) {
+        card.classList.remove("hide-card");
+        card.classList.add("show-card");
         card.style.display = "inherit";
       } else {
+        card.classList.remove("show-card");
+        card.classList.add("hide-card");
         card.style.display = "none";
       }
     }
@@ -108,6 +112,11 @@ function searchUsers(e) {
   } else {
     filteredList = userListLoaded;
   }
+}
+//function to provide feedback if no employees are found
+function checkSearch(){
+  let cards = document.getElementsByClassName("show-card");
+  cards.length>0?h1.textContent ="EMPLOYEE DIRECTORY" : h1.textContent="NO RESULTS FOUND" ; 
 }
 //Funciton to compare the email value as a unique identifier on click with the userListLoaded data and pass it to constructor
 function checkModalMatch(event) {
@@ -156,5 +165,5 @@ function modalButtonHandler(e) {
 }
 /******************EVENT LISTENERS**************/
 galleryDiv.addEventListener("click", (e) => checkModalMatch(e));
-searchContainer.addEventListener("keyup", (e) => searchUsers(e));
+searchContainer.addEventListener("keyup", (e) =>{searchUsers(e);checkSearch()});
 searchContainer.addEventListener("click", (e) => searchUsers(e));
