@@ -112,15 +112,13 @@ function modalButtonHandler(e) {
   }
   if (e.target.id === "modal-prev") {
       pageBody.removeChild(modalDiv);
-      let newModalIndex = currentModalUserIndex - 1;
-      currentModalUserIndex = newModalIndex;
-      modalConstructor(filteredList[newModalIndex]);
+      currentModalUserIndex -=1
+      modalConstructor(filteredList[currentModalUserIndex]);
     }
     if (e.target.id === "modal-next") {
         pageBody.removeChild(modalDiv);
-        let newModalIndex = currentModalUserIndex + 1;
-        currentModalUserIndex = newModalIndex;
-        modalConstructor(filteredList[newModalIndex]);             
+        currentModalUserIndex += 1;
+        modalConstructor(filteredList[currentModalUserIndex]);             
   } 
 }
 
