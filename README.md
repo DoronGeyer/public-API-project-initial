@@ -1,5 +1,5 @@
 # public API Project
-## added css for project
+## Added css for project
 
 * box shadows and hover color changes on cards
 * changed h1 text/position/fontsize
@@ -8,7 +8,7 @@
 * colors chosen for a corporate feel
 * modal prev/next buttons change color when list end cards are open
 
-## /key ideas used.
+## Key ideas used.
 
 * async fetch requests
 * vanilla js without frameworks or plugins
