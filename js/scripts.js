@@ -68,7 +68,7 @@ function modalConstructor(person) {
           <p class="modal-text cap">${person.location.city}</p>
           <hr>
           <p class="modal-text">${person.phone.replace("-", " ")}</p>
-          <p class="modal-text">${address.street.number}${
+          <p class="modal-text">${address.street.number} ${
     address.street.name
   }, ${address.city}, ${address.state} ${address.postcode}</p>
           <p class="modal-text">Birthday: ${(person.dob.date = new Intl.DateTimeFormat(
