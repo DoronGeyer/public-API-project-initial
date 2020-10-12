@@ -101,6 +101,7 @@ function checkModalMatch(event) {
       if (currentUser.email === userEmail) {
         currentModalUserIndex = i;
         modalConstructor(currentUser);
+        break;
       }
     }
   }
