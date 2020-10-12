@@ -70,7 +70,7 @@ function searchUsers(e) {
   let cardCollection = document.getElementsByClassName("card");
   let iterable = [...cardCollection];
   if (e.target.tagName === "INPUT" || e.target.id === "search-submit") {
-    searchInput = document.querySelector("#search-input").value.toLowerCase();
+     let searchInput = document.querySelector("#search-input").value.toLowerCase();
     for (const card of iterable) {
       let cardName = card.querySelector("h3").textContent.toLowerCase();
       if (cardName.includes(searchInput)) {
